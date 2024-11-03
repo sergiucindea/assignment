@@ -1,0 +1,17 @@
+::ng-deep .text-green {
+    button {
+        color: #344e41;
+    }
+}
+
+::ng-deep .text-red {
+    button {
+        color: darkred;
+    }
+}
+
+::ng-deep .text-secondary {
+    button {
+        color: grey;
+    }
+}

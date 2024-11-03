@@ -1,0 +1,38 @@
+td, th {
+    border-bottom: 1px solid #dfdfdf;
+}
+td:not(:last-of-type),
+th:not(:last-of-type) {
+    border-right: 1px solid #dfdfdf;
+}
+
+td, th {
+    padding: 0.5rem 0.5rem !important;
+}
+
+.p-highlight {
+    background-color: #dfebd5;
+    color: rgb(54, 54, 0);
+}
+
+p-card {
+    display: block;
+}
+
+th {
+    background-color: #dfdfdf;
+    // &:first-of-type {
+    //     border-radius: 10px 0 0 10px;
+    // }
+    // &:last-of-type {
+    //     border-radius: 0 10px 10px 0;
+    // }
+}
+
+::ng-deep .p-datatable-tbody > tr > td.overflow-hidden {
+    width: 150px;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -1,0 +1,28 @@
+<ng-template #modal>
+    <div class="modal-header  {{ modalConfig.headerClass }}">
+        <h4 class="modal-title" [innerHTML]="modalConfig.title"></h4>
+    </div>
+    <div class="modal-body">
+        <ng-content></ng-content>
+    </div>
+    <div class="modal-footer">
+        <p-button 
+                [style]="{'padding':'.5rem 2.5rem', 'border-radius' : '5px'}" 
+                [label]="modalConfig.closeButtonLabel ? modalConfig.closeButtonLabel : 'Close'"
+                (click)="modalConfig.onClose ? modalConfig.onClose() : close()"
+                [ngClass]="modalConfig.closeButtonClass || ''"
+                [severity]="modalConfig.closeButtonColor ? modalConfig.closeButtonColor : null"
+                [text]="modalConfig.closeButtonTextOnly ? modalConfig.closeButtonTextOnly : false">
+            </p-button>
+        <div>
+            <p-button 
+                [style]="{'padding':'.5rem 2.5rem', 'border-radius' : '5px'}" 
+                [label]="modalConfig.submitButtonLabel ? modalConfig.submitButtonLabel : 'Save'"
+                (click)="modalConfig.onSubmit?.()" 
+                [ngClass]="modalConfig.submitButtonClass || ''"
+                [severity]="modalConfig.submitButtonColor ? modalConfig.submitButtonColor : null"
+                [text]="modalConfig.submitButtonTextOnly ? modalConfig.submitButtonTextOnly : false">
+            </p-button>
+        </div>
+    </div>
+</ng-template>

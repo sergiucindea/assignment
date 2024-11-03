@@ -1,1 +1,89 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    /* font-family: Roboto, "Helvetica Neue", sans-serif; */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.bg-grey {
+    background-color: rgb(247, 247, 247);
+}
+
+/* Variables */
+
+$background-color-green: #344e41;
+$background-color-light-green: #76a58d;
+$background-color-platinum: #f0e9eb;
+
+.bg-green {
+    background-color: $background-color-green;
+}
+
+.bg-platinum {
+    background-color: $background-color-platinum;
+}
+
+.custom-sidebar-col {
+    flex: 0 0 auto;
+    width: 10%;
+}
+
+.custom-content-col {
+    flex: 0 0 auto;
+    width: 90%;
+}
+
+.p-card .p-card-content {
+    padding: 0.15rem 0;
+}
+
+.p-card.p-component {
+    height: 100%;
+}
+
+.p-card .p-card-body {
+    padding: 1rem;
+}
+
+#pn_id_1-table > .p-datatable-thead > tr > th:nth-child(9) {
+    width: 100px !important;
+    max-width: 100px !important;
+}
+
+ol, ul {
+    padding-left: 0;
+}
+
+.select-btn .p-button {
+    padding: 0.5rem 0.7rem;
+}
+
+.p-selectbutton .p-button.p-highlight {
+    background-color: $background-color-light-green;
+    border: none;
+}
+
+p-calendar {
+    border: none;
+    padding: 0;
+
+    span {
+        width: 100%;
+        input {
+            padding: 4px;
+            border-radius: 0 5px 5px 0;
+        }
+    }
+}
+
+.p-inputgroup-addon {
+ padding: 0;
+}

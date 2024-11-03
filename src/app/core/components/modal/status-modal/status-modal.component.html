@@ -1,0 +1,24 @@
+<ng-template #modal>
+    <div class="modal-header {{ headerClass }}">
+        <h5 class="modal-title fw-bold text-light m-0" [innerHTML]="status"></h5>
+        <button type="button"
+            class="btn-close pe-2" 
+            aria-label="Close"
+            (click)="close()"></button>
+    </div>
+
+    <div class="d-flex justify-content-center flex-column align-items-center pt-4">
+        <span [innerHTML]="statusIcon" class="status-icon" [ngStyle]="statusIconStyle"></span>
+        <div class="modal-body fw-bold text-center">
+            {{ message }}
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+        <button 
+            mat-raised-button 
+            class="btn {{ btnClass }}"
+            (click)="close()">Dismiss
+        </button>
+    </div>
+</ng-template>
