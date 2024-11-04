@@ -66,6 +66,22 @@
     </p-table>
 </p-card>
 
+<div>
+    <app-context-bar
+        [btnConfig]="btnConfig"
+        [btnList]="btnList"
+        (buttonClick)="onBtnClick($event)"
+    ></app-context-bar>
+</div>
+
 <app-modal #addModal [modalConfig]="addModalConfig">
     <app-add-beneficiary-modal (refreshTable)="refreshTable()" [modalComp]="addModal"></app-add-beneficiary-modal>
+</app-modal>
+
+<app-modal #editModal [modalConfig]="editModalConfig">
+    <app-edit-beneficiary-modal (refreshTable)="refreshTable()" [modalComp]="editModal"></app-edit-beneficiary-modal>
+</app-modal>
+
+<app-modal #deleteModal [modalConfig]="deleteModalConfig">
+    Are you sure you want to delete this <strong>Beneficiary</strong> ?
 </app-modal>

@@ -7,6 +7,8 @@ import { ModalConfig, ModalStatusType } from 'src/app/core/components/modal/moda
 import { BeneficiaryViewEnum, beneficiaryViews, legalEntityCols, normalPersonCols } from './constants';
 import { FilterService } from 'src/app/core/services/filter.service';
 import { ModalComponent } from 'src/app/core/components/modal/modal.component';
+import { CtxBarBtnConfig } from '../../context-bar/models/ctx-bar-btn.config.model';
+import { EditBeneficiaryModalComponent } from './edit-beneficiary-modal/edit-beneficiary-modal.component';
 
 @Component({
   selector: 'app-beneficiaries',
@@ -15,6 +17,10 @@ import { ModalComponent } from 'src/app/core/components/modal/modal.component';
 })
 export class BeneficiariesComponent implements OnInit {
   @ViewChild('addModal') addModalComponent!: ModalComponent;
+  @ViewChild('editModal') editModalComponent!: ModalComponent;
+  @ViewChild('deleteModal') deleteModalComponent!: ModalComponent;
+
+  @ViewChild(EditBeneficiaryModalComponent, { static: false}) editModalCompRef!: EditBeneficiaryModalComponent;
 
   private cachedList: BeneficiaryDisplayModel[] = [];
   protected beneficiaryList: BeneficiaryDisplayModel[] = [] ;
@@ -23,6 +29,8 @@ export class BeneficiariesComponent implements OnInit {
   protected displayAllRows: boolean = true;
   protected selectedView!: string;
   protected views: string[] = beneficiaryViews;
+  protected btnList: any[] = [];
+  protected btnConfig: any = {};
 
   constructor(private beneficiaryService: BeneficiaryService, protected utils: UtilsService,
     private filterService: FilterService
@@ -30,6 +38,29 @@ export class BeneficiariesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBeneficiaryList();
+    this.setContextBarButtons();
+  }
+
+  private setContextBarButtons() {
+    let addBtn: CtxBarBtnConfig = {
+      label: 'Add Beneficiary',
+      key: 'Add',
+      disabled: false
+    }
+
+    let editBtn: CtxBarBtnConfig = {
+      label: 'Edit',
+      key: 'edit',
+      disabled: true
+    }
+
+    let deleteBtn: CtxBarBtnConfig = {
+      label: 'Delete',
+      key: 'delete',
+      disabled: true
+    }
+
+    this.btnList = [ addBtn, editBtn, deleteBtn ];
   }
 
   onRowSelect(event: any) {
@@ -38,8 +69,6 @@ export class BeneficiariesComponent implements OnInit {
   }
 
   onViewChange() {
-    this.addModalComponent.open();
-
     switch (this.selectedView) {
       case BeneficiaryViewEnum.All: {
         this.displayAllRows = true;
@@ -61,6 +90,35 @@ export class BeneficiariesComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  onBtnClick(event: { btn: any, key: string }) {
+    switch (event.key) {
+      case 'add':
+        this.addClicked();
+        break;
+      case 'edit':
+        this.editClicked();
+        break;
+      case 'delete':
+        this.deleteClicked();
+        break;
+      default:
+        break;
+    }
+  }
+
+  private addClicked() {
+    this.addModalComponent.open();
+  }
+
+  private editClicked() {
+    this.editModalCompRef.init(this.selectedRow!);
+    this.editModalComponent.open();
+  }
+
+  private deleteClicked() {
+    this.deleteModalComponent.open();
   }
 
   parseColumn(field: keyof BeneficiaryDisplayModel, beneficiary: BeneficiaryDisplayModel) {
@@ -86,7 +144,7 @@ export class BeneficiariesComponent implements OnInit {
     console.log(this.beneficiaryList);
   }
 
-  //#region addModal
+  //#region modal configs
 
   addModalConfig: ModalConfig = {
     title: 'Add Beneficiary',
@@ -98,6 +156,35 @@ export class BeneficiariesComponent implements OnInit {
     closeButtonClass: 'text-green',
     submitButtonLabel: 'Save',
     submitButtonColor: 'info',
+  }
+
+  editModalConfig: ModalConfig = {
+    title: 'Edit Beneficiary',
+    headerClass: 'bg-green text-light',
+    options: {
+      size: 'l'
+    },
+    closeButtonTextOnly: true,
+    closeButtonClass: 'text-green',
+    submitButtonLabel: 'Save',
+    submitButtonColor: 'info',
+  }
+
+  deleteModalConfig: ModalConfig = {
+    title: 'Delete Beneficiary',
+    headerClass: 'bg-danger text-light',
+    options: {
+      size: 'l'
+    },
+    closeButtonTextOnly: true,
+    closeButtonClass: 'text-danger',
+    submitButtonLabel: 'Yes',
+    submitButtonColor: 'danger',
+    onSubmit: this.deleteBeneficiary.bind(this),
+  }
+
+  private deleteBeneficiary() {
+    this.beneficiaryService.deleteBeneficiary(this.selectedRow?.id!);
   }
 
   //#endregion

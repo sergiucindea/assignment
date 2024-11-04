@@ -5,6 +5,7 @@ import { BeneficiaryDisplayModel, BeneficiaryTypeEnum } from '../../models/benef
 import { BeneficiaryService } from '../../services/beneficiary.service';
 import { StatusModalService } from 'src/app/core/components/modal/status-modal/status-modal.service';
 import { ModalStatusType } from 'src/app/core/components/modal/modal.config';
+import { ResponseModel } from 'src/app/core/models/response.model';
 
 @Component({
   selector: 'app-add-beneficiary-modal',
@@ -20,6 +21,7 @@ export class AddBeneficiaryModalComponent implements OnInit {
   constructor(private beneficiaryService: BeneficiaryService, private statusModalService: StatusModalService) {}
 
   ngOnInit(): void {
+    this.formCompRef.form.reset();
     this.setButtons();
   }
 
@@ -29,11 +31,11 @@ export class AddBeneficiaryModalComponent implements OnInit {
 
   private submitClicked() {
     this.formCompRef.form.markAllAsTouched();
-    console.log(this.formCompRef.form.value);
+
     if (this.formCompRef.form.valid) {
-      this.beneficiaryService.createBeneficiary(this.setBeneficiaryDisplayModel(this.formCompRef.form.value));
+      let response: ResponseModel = this.beneficiaryService.createBeneficiary(this.setBeneficiaryDisplayModel(this.formCompRef.form.value));
       this.refreshTable.emit(true);
-      this.statusModalService.openStatusModal('Beneficiary added successfully!', ModalStatusType.Success);
+      this.statusModalService.openStatusModal(response.message, response.type);
       this.modalComp.close();
     }
   }
@@ -54,11 +56,4 @@ export class AddBeneficiaryModalComponent implements OnInit {
     }
   }
 
-  private addLegalEntity() {
-
-  }
-
-  private addNormalPerson() {
-
-  }
 }

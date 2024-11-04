@@ -1,5 +1,5 @@
 <p-card>
-    <div class="d-flex justify-content-between">
+    <!-- <div class="d-flex justify-content-between">
         <button 
             pButton 
             pRipple 
@@ -19,6 +19,18 @@
             label="Delete Beneficiary" 
             [disabled]="true"
             class="p-button-danger button-custom">
+        </button>
+    </div> -->
+    <div [ngClass]="btnConfig.containerClass || ''">
+        <button 
+            *ngFor="let btn of btnList; let i = index"
+            pButton 
+            pRipple 
+            [label]="btn.label || ''"
+            [ngClass]="btn.class || ''" 
+            [disabled]="btn.disabled"
+            (click)="onButtonClick(btn, i)"
+            >
         </button>
     </div>
 </p-card>

@@ -8,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SidebarComponent } from './features/sidebar/sidebar.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { BeneficiariesComponent } from './features/beneficiaries/components/beneficiaries.component';
-import { ContextBarComponent } from './features/context-bar/context-bar.component';
+import { ContextBarComponent } from './features/context-bar/components/context-bar.component';
 import { AddBeneficiaryModalComponent } from './features/beneficiaries/components/add-beneficiary-modal/add-beneficiary-modal.component';
 import { BeneficiaryFormComponent } from './features/beneficiaries/components/beneficiary-form/beneficiary-form.component';
 import { EditBeneficiaryModalComponent } from './features/beneficiaries/components/edit-beneficiary-modal/edit-beneficiary-modal.component';
