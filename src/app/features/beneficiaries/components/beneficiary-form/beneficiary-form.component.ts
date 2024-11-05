@@ -25,33 +25,10 @@ export class BeneficiaryFormComponent implements OnInit {
     }
   ];
 
-  private leForm: FormGroup = new FormGroup({
-    'Id': new FormControl(''),
-    'Type': new FormControl('LegalEntity'),
-    'Name': new FormControl('', Validators.required),
-    'CUI': new FormControl('', [Validators.required, this.utils.cuiValidator()]),
-    'IncorporationDate': new FormControl('', this.utils.dateValidator()),
-    'Address': new FormControl(''),
-    'Phone': new FormControl('', this.utils.phoneValidator()),
-    'IBANs': new FormControl('', [this.utils.ibanValidator()])
-  });
-  
-  private personForm: FormGroup = new FormGroup({
-    'Id': new FormControl(''),
-    'Type': new FormControl('NormalPerson'),
-    'Address': new FormControl(''),
-    'Phone': new FormControl('', this.utils.phoneValidator()),
-    'IBANs': new FormControl('', [this.utils.ibanValidator()]),
-    'FirstName': new FormControl('', Validators.required),
-    'LastName': new FormControl('', Validators.required),
-    'CNP': new FormControl('', [Validators.required, this.utils.cnpValidator()]),
-    'BirthDate': new FormControl('', this.utils.dateValidator()),
-  });
-
   constructor(protected utils: UtilsService) {}
 
   ngOnInit(): void {
-    this.formGroup = this.leForm;
+    this.setLeForm();
   }
 
   setBeneficiaryType(type?: number) {
@@ -67,7 +44,11 @@ export class BeneficiaryFormComponent implements OnInit {
   onTypeChange() {
     let selectedType = this.formGroup.get('Type')!.value;
     this.selectedBeneficiaryType = selectedType === 'LegalEntity' ? BeneficiaryTypeEnum.LegalEntity : BeneficiaryTypeEnum.NormalPerson;
-    this.formGroup = selectedType === 'LegalEntity' ? this.leForm : this.personForm;
+    if (selectedType === 'LegalEntity') {
+      this.setLeForm();
+    } else {
+      this.setPersonForm();
+    }
     this.formGroup.get('Type')!.patchValue(selectedType);
   }
 
@@ -104,6 +85,33 @@ export class BeneficiaryFormComponent implements OnInit {
       CNP: data.CNP || '',
       BirthDate: data.birthDate ? new Date(data.birthDate) : null
     })
+  }
+
+  private setLeForm() {
+    this.formGroup = new FormGroup({
+      'Id': new FormControl(''),
+      'Type': new FormControl('LegalEntity'),
+      'Name': new FormControl('', Validators.required),
+      'CUI': new FormControl('', [Validators.required, this.utils.cuiValidator()]),
+      'IncorporationDate': new FormControl('', this.utils.dateValidator()),
+      'Address': new FormControl(''),
+      'Phone': new FormControl('', this.utils.phoneValidator()),
+      'IBANs': new FormControl('', [this.utils.ibanValidator()])
+    });
+  }
+
+  private setPersonForm() {
+    this.formGroup = new FormGroup({
+      'Id': new FormControl(''),
+      'Type': new FormControl('NormalPerson'),
+      'Address': new FormControl(''),
+      'Phone': new FormControl('', this.utils.phoneValidator()),
+      'IBANs': new FormControl('', [this.utils.ibanValidator()]),
+      'FirstName': new FormControl('', Validators.required),
+      'LastName': new FormControl('', Validators.required),
+      'CNP': new FormControl('', [Validators.required, this.utils.cnpValidator()]),
+      'BirthDate': new FormControl('', this.utils.dateValidator()),
+    });
   }
 
   get form() {
