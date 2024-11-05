@@ -14,7 +14,7 @@ export const beneficiaryList: BeneficiaryDisplayModel[] = [
     {
         id: 2,
         address: '45 Rainy St, Cluj-Napoca',
-        phone: '0264-555-6789',
+        phone: '0264-555-689',
         IBANs: ['RO17RZBR3444631451528937'],
         type: BeneficiaryTypeEnum.NormalPerson,
         lastName: 'Popescu',
@@ -25,7 +25,7 @@ export const beneficiaryList: BeneficiaryDisplayModel[] = [
     {
         id: 3,
         address: '78 Foggy Rd, Timisoara',
-        phone: '0256-555-2233',
+        phone: '0256-555-233',
         IBANs: ['FR5712739000405441648861F44', 'FR1512739000405648925797F57'],
         type: BeneficiaryTypeEnum.LegalEntity,
         name: 'Tech Wave',
@@ -35,7 +35,7 @@ export const beneficiaryList: BeneficiaryDisplayModel[] = [
     {
         id: 4,
         address: '12 Winter Blvd, Iasi',
-        phone: '0232-555-3344',
+        phone: '0292-555-344',
         IBANs: ['RO54PORL8281494545236253'],
         type: BeneficiaryTypeEnum.NormalPerson,
         lastName: 'Ionescu',
@@ -46,7 +46,7 @@ export const beneficiaryList: BeneficiaryDisplayModel[] = [
     {
         id: 5,
         address: '90 Spring St, Brasov',
-        phone: '0268-555-4455',
+        phone: '0268-555-445',
         IBANs: ['RO04RZBR1329312869941389'],
         type: BeneficiaryTypeEnum.LegalEntity,
         name: 'Green Solutions',
@@ -56,7 +56,7 @@ export const beneficiaryList: BeneficiaryDisplayModel[] = [
     {
         id: 6,
         address: '53 Mountain Ave, Sibiu',
-        phone: '0269-555-5566',
+        phone: '0269-555-566',
         IBANs: ['RO51RZBR9729467343772363'],
         type: BeneficiaryTypeEnum.NormalPerson,
         lastName: 'Vasilescu',
@@ -67,7 +67,7 @@ export const beneficiaryList: BeneficiaryDisplayModel[] = [
     {
         id: 7,
         address: '27 River Rd, Constanta',
-        phone: '0241-555-6677',
+        phone: '0241-555-677',
         IBANs: ['RO32RZBR7766225388964392', 'RO96PORL2381856739953428'],
         type: BeneficiaryTypeEnum.LegalEntity,
         name: 'Fast Logistics',
@@ -77,7 +77,7 @@ export const beneficiaryList: BeneficiaryDisplayModel[] = [
     {
         id: 8,
         address: '34 Ocean St, Galati',
-        phone: '0236-555-7788',
+        phone: '0236-555-788',
         IBANs: ['GB06BARC20039584543823'],
         type: BeneficiaryTypeEnum.NormalPerson,
         lastName: 'Georgescu',
@@ -88,7 +88,7 @@ export const beneficiaryList: BeneficiaryDisplayModel[] = [
     {
         id: 9,
         address: '81 Desert Ave, Ploiesti',
-        phone: '0244-555-8899',
+        phone: '0244-555-889',
         IBANs: ['GB17BARC20037858851642'],
         type: BeneficiaryTypeEnum.LegalEntity,
         name: 'Creative Minds',
@@ -98,7 +98,7 @@ export const beneficiaryList: BeneficiaryDisplayModel[] = [
     {
         id: 10,
         address: '65 City Square, Craiova',
-        phone: '0251-555-9900',
+        phone: '0251-555-990',
         IBANs: ['GB15BARC20037869338542'],
         type: BeneficiaryTypeEnum.NormalPerson,
         lastName: 'Dumitrescu',
