@@ -1,0 +1,40 @@
+@import "../../../assets/variables";
+
+.sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    a {
+        text-align: center;
+        display: block;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.2s ease;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 1rem 1rem;
+
+        i {
+            color: white;
+        }
+
+        &:hover {
+            background-color: $background-color-platinum;
+            color: $background-color-dark-green;
+        }
+
+        &.active {
+            background-color: $background-color-platinum;  
+            
+            a,i {
+                font-weight: bold;
+                color: $background-color-dark-green;
+            }
+        }
+    }
+}

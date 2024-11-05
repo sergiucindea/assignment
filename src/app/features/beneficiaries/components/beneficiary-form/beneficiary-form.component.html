@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup" class="d-flex flex-column align-items-center">
-    <div class="d-flex flex-column gap-1 col-10">
+    <div *ngIf="displayBeneficiaryType" class="d-flex flex-column gap-1 col-10">
         <p-selectButton 
             class="select-btn text-center mt-2"
             [options]="beneficiaryType" 
@@ -10,13 +10,20 @@
     </div>
 
     <ng-container *ngIf="selectedBeneficiaryType === BeneficiaryType.LegalEntity">
-        <div class="d-flex flex-column gap-1 mt-3 col-10">
-            <label for="name">Name</label>
-            <input type="text" pInputText id="name" formControlName="Name" />
+        <div class="d-flex flex-column gap-1 mt-1 col-10">
+            <label for="name">Name<span class="red-asterisk">*</span></label>
+            <input maxlength="100" maxlength="100" type="text" pInputText id="name" formControlName="Name" />
+            <div *ngIf="utils.showFormControlError(formGroup, 'Name', 'required')" class="text-danger">
+                Name is required.
+            </div>
         </div>
         <div class="d-flex flex-column gap-1 mt-3 col-10">
-            <label for="cui">CUI</label>
-            <input type="text" pInputText id="cui" formControlName="CUI" />
+            <label for="cui">CUI<span class="red-asterisk">*</span></label>
+            <input maxlength="100" type="text" pInputText id="cui" formControlName="CUI" />
+            <div *ngIf="utils.showFormControlError(formGroup, 'CUI', 'invalidCUI')" class="text-danger">
+                CUI must be valid.
+            </div>
+
         </div>
         <div class="d-flex flex-column gap-1 mt-3 col-10">
             <label for="incDate">Incorporation Date</label>
@@ -24,22 +31,34 @@
                 <p-inputGroupAddon>
                     <i class="pi pi-calendar"></i>
                 </p-inputGroupAddon>
-                <p-calendar type="text" pInputText id="incDate" formControlName="IncorporationDate" />
+                <p-calendar id="incDate" formControlName="IncorporationDate" />
             </p-inputGroup>
+            <div *ngIf="utils.showFormControlError(formGroup, 'IncorporationDate', 'invalidDate')" class="text-danger">
+                Incorporation Date must be valid.
+            </div>
         </div>
     </ng-container>
     <ng-container *ngIf="selectedBeneficiaryType === BeneficiaryType.NormalPerson">
-        <div class="d-flex flex-column gap-1 mt-3 col-10">
-            <label for="fname">First Name</label>
-            <input type="text" pInputText id="fname" formControlName="FirstName" />
+        <div class="d-flex flex-column gap-1 mt-1 col-10">
+            <label for="fname">First Name<span class="red-asterisk">*</span></label>
+            <input maxlength="100" type="text" pInputText id="fname" formControlName="FirstName" />
+            <div *ngIf="utils.showFormControlError(formGroup, 'FirstName', 'required')" class="text-danger">
+                First Name is required.
+            </div>
         </div>
         <div class="d-flex flex-column gap-1 mt-3 col-10">
-            <label for="lname">Last Name</label>
-            <input type="text" pInputText id="lname" formControlName="LastName" />
+            <label for="lname">Last Name<span class="red-asterisk">*</span></label>
+            <input maxlength="100" type="text" pInputText id="lname" formControlName="LastName" />
+            <div *ngIf="utils.showFormControlError(formGroup, 'LastName','required')" class="text-danger">
+                Last Name is required.
+            </div>
         </div>
         <div class="d-flex flex-column gap-1 mt-3 col-10">
-            <label for="cnp">CNP</label>
-            <input type="text" pInputText id="cnp" formControlName="CNP" />
+            <label for="cnp">CNP<span class="red-asterisk">*</span></label>
+            <input maxlength="100" type="text" pInputText id="cnp" formControlName="CNP" />
+            <div *ngIf="utils.showFormControlError(formGroup, 'CNP', 'invalidCNP')" class="text-danger">
+                CNP must be valid.
+            </div>
         </div>
         <div class="d-flex flex-column gap-1 mt-3 col-10">
             <label for="birthDate">Birth Date</label>
@@ -47,21 +66,30 @@
                 <p-inputGroupAddon>
                     <i class="pi pi-calendar"></i>
                 </p-inputGroupAddon>
-                <p-calendar type="text" pInputText id="birthDate" formControlName="BirthDate" />
+                <p-calendar id="birthDate" formControlName="BirthDate" />
             </p-inputGroup>
+            <div *ngIf="utils.showFormControlError(formGroup, 'BirthDate', 'invalidDate')" class="text-danger">
+                Birth Date must be valid.
+            </div>
         </div>
     </ng-container>
 
     <div class="d-flex flex-column gap-1 mt-3 col-10">
         <label for="address">Address</label>
-        <input type="text" pInputText id="address" formControlName="Address" />
+        <input maxlength="100" type="text" pInputText id="address" formControlName="Address" />
     </div>
     <div class="d-flex flex-column gap-1 mt-3 col-10">
         <label for="phone">Phone</label>
-        <input type="text" pInputText id="phone" formControlName="Phone" />
+        <input maxlength="100" type="text" pInputText id="phone" formControlName="Phone" />
+        <div *ngIf="utils.showFormControlError(formGroup, 'Phone', 'invalidPhone')" class="text-danger">
+            Phone must be valid.
+        </div>
     </div>
     <div class="d-flex flex-column gap-1 my-3 col-10">
         <label for="iban">IBANs</label>
-        <input type="text" pInputText id="iban" formControlName="IBANs" />
+        <p-chips [maxLength]="100" formControlName="IBANs" />
+        <div *ngIf="utils.showFormControlError(formGroup, 'IBANs', 'invalidIBAN')" class="text-danger">
+            IBANS must be valid.
+        </div>
     </div>
 </form>

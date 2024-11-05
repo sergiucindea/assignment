@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ModalConfig } from './modal.config';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal',
@@ -12,7 +12,8 @@ export class ModalComponent implements OnInit {
   @ViewChild('modal') modalContent!: TemplateRef<ModalComponent>;
   @Input() modalConfig!: ModalConfig;
   protected buttonColor!: string;
-
+  public modalRef!: NgbModalRef;
+  
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -21,11 +22,17 @@ export class ModalComponent implements OnInit {
   }
 
   open() {
-    this.modalService.open(this.modalContent, this.modalConfig.options);
+    this.modalRef = this.modalService.open(this.modalContent, this.modalConfig.options);
+  }
+
+  closeAll() {
+    this.modalService.dismissAll();
   }
 
   close() {
-    this.modalService.dismissAll();
+    if (this.modalRef) {
+      this.modalRef.close();
+    }
   }
 
 }

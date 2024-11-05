@@ -2,7 +2,7 @@
     <div class="modal-header  {{ modalConfig.headerClass }}">
         <h4 class="modal-title" [innerHTML]="modalConfig.title"></h4>
     </div>
-    <div class="modal-body">
+    <div class="modal-body {{ modalConfig.bodyClass }}">
         <ng-content></ng-content>
     </div>
     <div class="modal-footer">
@@ -11,7 +11,6 @@
                 [label]="modalConfig.closeButtonLabel ? modalConfig.closeButtonLabel : 'Close'"
                 (click)="modalConfig.onClose ? modalConfig.onClose() : close()"
                 [ngClass]="modalConfig.closeButtonClass || ''"
-                [severity]="modalConfig.closeButtonColor ? modalConfig.closeButtonColor : null"
                 [text]="modalConfig.closeButtonTextOnly ? modalConfig.closeButtonTextOnly : false">
             </p-button>
         <div>
@@ -20,7 +19,6 @@
                 [label]="modalConfig.submitButtonLabel ? modalConfig.submitButtonLabel : 'Save'"
                 (click)="modalConfig.onSubmit?.()" 
                 [ngClass]="modalConfig.submitButtonClass || ''"
-                [severity]="modalConfig.submitButtonColor ? modalConfig.submitButtonColor : null"
                 [text]="modalConfig.submitButtonTextOnly ? modalConfig.submitButtonTextOnly : false">
             </p-button>
         </div>

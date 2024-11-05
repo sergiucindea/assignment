@@ -8,6 +8,15 @@
     border: none;
 }
 
+
+.p-button {
+    border: none;
+}
+
 .p-button:disabled {
-    background-color: lightgray;
+    background-color: lightgray !important;
+}
+
+i.pi {
+    font-size: 0.8rem;
 }

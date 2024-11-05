@@ -1,9 +1,15 @@
-td, th {
+
+tr {
     border-bottom: 1px solid #dfdfdf;
 }
-td:not(:last-of-type),
-th:not(:last-of-type) {
+
+td, th {
     border-right: 1px solid #dfdfdf;
+}
+
+td:first-of-type,
+th:first-of-type {
+    border-left: 1px solid #dfdfdf;
 }
 
 td, th {
@@ -21,12 +27,15 @@ p-card {
 
 th {
     background-color: #dfdfdf;
-    // &:first-of-type {
-    //     border-radius: 10px 0 0 10px;
-    // }
-    // &:last-of-type {
-    //     border-radius: 0 10px 10px 0;
-    // }
+}
+
+::ng-deep .p-card .p-card-title {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+}
+
+::ng-deep .p-datatable .p-datatable-header {
+    padding: 0.5rem;
 }
 
 ::ng-deep .p-datatable-tbody > tr > td.overflow-hidden {
@@ -35,4 +44,9 @@ th {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+::ng-deep .p-column-filter-add-rule,
+::ng-deep .p-column-filter-operator {
+    display: none !important;
 }

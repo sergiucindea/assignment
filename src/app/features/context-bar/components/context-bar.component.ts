@@ -19,7 +19,7 @@ export class ContextBarComponent implements OnInit {
 
   onButtonClick(btn: any, index: number) {
     if (this.btnList.length > 0) {
-      let key = this.btnList.find((btn: any) => btn.id === index)!.key!;
+      let key = this.btnList[index].key!;
       this.buttonClick.emit({ btn, key });
     }
   }

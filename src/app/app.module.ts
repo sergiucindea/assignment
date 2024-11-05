@@ -26,6 +26,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { CalendarModule } from 'primeng/calendar';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { ChipModule } from 'primeng/chip';
+import { ChipsModule } from 'primeng/chips';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
     SelectButtonModule,
     CalendarModule,
     InputGroupModule,
-    InputGroupAddonModule
+    InputGroupAddonModule,
+    ChipModule,
+    ChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

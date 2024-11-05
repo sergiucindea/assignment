@@ -1,13 +1,12 @@
 export interface ModalConfig {
     title?: string,
     headerClass?: string,
+    bodyClass?: string,
     options?: any,
     closeButtonLabel?: string;
-    closeButtonColor?: "success" | "info" | "warning" | "danger" | "help" | "primary" | "secondary" | "contrast" | null | undefined; // from primeng docs
     closeButtonTextOnly?: boolean;
     closeButtonClass?: string;
     submitButtonLabel?: string;
-    submitButtonColor?: "success" | "info" | "warning" | "danger" | "help" | "primary" | "secondary" | "contrast" | null | undefined; // from primeng docs;
     submitButtonTextOnly?: boolean;
     submitButtonClass?: string;
     onSubmit?: () => void; 

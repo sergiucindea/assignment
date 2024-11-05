@@ -2,7 +2,6 @@ export interface Beneficiary {
     address?: string;
     phone?: string;
     IBANs?: string[];
-    type: BeneficiaryTypeEnum;
 }
 
 export interface LegalEntity extends Beneficiary {

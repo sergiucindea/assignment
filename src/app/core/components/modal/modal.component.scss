@@ -10,6 +10,12 @@
     }
 }
 
+::ng-deep .text-warn {
+    button {
+        color: #ffc107;
+    }
+}
+
 ::ng-deep .text-secondary {
     button {
         color: grey;

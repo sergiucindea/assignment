@@ -1,77 +1,144 @@
-<p-card header="Beneficiaries" class="h-100" role="region">
-    <p-table 
-        [value]="beneficiaryList" 
-        [columns]="selectedColumns" 
-        [resizableColumns]="true"
-        styleClass="p-datatable-striped"  
-        selectionMode="single" 
-        columnResizeMode="expand" 
-        [scrollable]="true"
-        scrollHeight="100%"
-        [(selection)]="selectedRow" 
-        (onRowSelect)="onRowSelect($event)" 
-        dataKey="id" 
-        [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template pTemplate="caption">
-            <div class="d-flex justify-content-start">
-                <p-dropdown 
-                    [options]="views" 
-                    [(ngModel)]="selectedView" 
-                    (onChange)="onViewChange()"
-                    placeholder="Select Beneficiary Type" />
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <ng-container *ngIf="displayAllRows">
-                    <th pResizableColumn pSortableColumn="name" style="width:2%">Name <p-sortIcon field="Type"/></th>
-                    <th pResizableColumn pSortableColumn="CUI" style="width:8%">CUI <p-sortIcon field="Type"/></th>
-                    <th pResizableColumn pSortableColumn="FirstName" style="width:9%">First Name <p-sortIcon field="Type"/></th>
-                    <th pResizableColumn pSortableColumn="LastName" style="width:9%">Last Name <p-sortIcon field="Type"/></th>
-                    <th pResizableColumn pSortableColumn="DateOfIncorporation" style="width:10%">Incorporated on <p-sortIcon field="Type"/></th>
-                    <th pResizableColumn pSortableColumn="BirthDate" style="width:10%">Birth Date <p-sortIcon field="Type"/></th>
-                    <th pResizableColumn pSortableColumn="Address" style="width:15%">Address <p-sortIcon field="Type"/></th>
-                    <th pResizableColumn pSortableColumn="Phone" style="width:12%">Phone <p-sortIcon field="Type"/></th>
-                    <th pResizableColumn pSortableColumn="IBANs" styleClass="overflow-hidden">IBANs <p-sortIcon field="Type"/></th>
-                </ng-container>
-                <ng-container *ngIf="!displayAllRows">
-                    <th *ngFor="let col of selectedColumns">
-                        {{col.header}}
-                    </th>
-                </ng-container>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-beneficiary>
-            <tr [pSelectableRow]="beneficiary">
-                <ng-container *ngIf="displayAllRows">
-                    <td>{{ beneficiary.name }}</td>
-                    <td>{{ beneficiary.CUI }}</td>
-                    <td>{{ beneficiary.firstName }}</td>
-                    <td>{{ beneficiary.lastName }}</td>
-                    <td>{{ utils.parseDate(beneficiary.dateOfIncorporation) }}</td>
-                    <td>{{ utils.parseDate(beneficiary.birthDate) }}</td>
-                    <td>{{ beneficiary.address }}</td>
-                    <td>{{ beneficiary.phone }}</td>
-                    <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                    {{ beneficiary.IBANs }}
-                    </td>
-                </ng-container>
-                <ng-container *ngIf="!displayAllRows">
-                    <td *ngFor="let col of selectedColumns" [style.width]="col.width">
-                        {{ parseColumn(col.field, beneficiary) }}
-                    </td>
-                </ng-container>
-            </tr>
-        </ng-template>
-    </p-table>
-</p-card>
+<div class="d-flex flex-column justify-content-between gap-3 h-100">
+    <p-card header="Beneficiaries" class="flex-fill" role="region">
+        <p-table 
+            [value]="beneficiaryList" 
+            [columns]="selectedColumns" 
+            [resizableColumns]="true"
+            styleClass="p-datatable-striped"  
+            selectionMode="single" 
+            columnResizeMode="expand" 
+            [scrollable]="true"
+            scrollHeight="630px"
+            [loading]="isTableLoading"
+            [(selection)]="selectedRow" 
+            (onRowSelect)="onRowSelect($event)" 
+            (onRowUnselect)="onRowUnselect($event)" 
+            dataKey="id" 
+            (onFilter)="onFilter($event)" [filters]="filters"
+            [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="caption">
+                <div class="d-flex justify-content-start align-items-center">
+                    <span class="me-2">Type</span>
+                    <p-dropdown 
+                        [options]="views" 
+                        [(ngModel)]="selectedView" 
+                        (onChange)="onViewChange()"
+                        placeholder="Select Beneficiary Type" />
+                </div>
+                <!-- <div class="flex">
+                    <p-iconField iconPosition="left" class="ml-auto">
+                        <p-inputIcon>
+                            <i class="pi pi-search"></i>
+                        </p-inputIcon>
+                        <input 
+                            pInputText 
+                            type="text" 
+                            (input)="dt2.filterGlobal($event.target.value, 'contains')" 
+                            placeholder="Search keyword" />
+                    </p-iconField>
+                </div> -->
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <ng-container *ngIf="displayAllRows">
+                        <th pResizableColumn pSortableColumn="name" style="width:2%">Name <p-sortIcon field="name"/>
+                            <div style="display: contents;">
+                                <p-columnFilter type="text" field="name" display="menu" />
+                            </div>
+                        </th>
+                        <th pResizableColumn pSortableColumn="CUI" style="width:8%">CUI <p-sortIcon field="CUI"/>
+                            <div style="display: contents;">
+                                <p-columnFilter type="text" field="CUI" display="menu" />
+                            </div>
+                        </th>
+                        <th pResizableColumn pSortableColumn="firstName" style="width:9%">First Name <p-sortIcon field="firstName"/>
+                            <div style="display: contents;">
+                                <p-columnFilter type="text" field="firstName" display="menu" />
+                            </div>
+                        </th>
+                        <th pResizableColumn pSortableColumn="lastName" style="width:9%">Last Name <p-sortIcon field="lastName"/>
+                            <div style="display: contents;">
+                                <p-columnFilter type="text" field="lastName" display="menu" />
+                            </div>
+                        </th>
+                        <th pResizableColumn pSortableColumn="dateOfIncorporation" style="width:10%">Incorporated on <p-sortIcon field="dateOfIncorporation"/>
+                            <div style="display: contents;">
+                                <p-columnFilter type="text" field="dateOfIncorporation" display="menu" />
+                            </div>
+                        </th>
+                        <th pResizableColumn pSortableColumn="birthDate" style="width:10%">Birth Date <p-sortIcon field="birthDate"/>
+                            <div style="display: contents;">
+                                <p-columnFilter type="text" field="birthDate" display="menu" />
+                            </div>
+                        </th>
+                        <th pResizableColumn pSortableColumn="address" style="width:15%">Address <p-sortIcon field="address"/>
+                            <div style="display: contents;">
+                                <p-columnFilter type="text" field="address" display="menu" />
+                            </div>
+                        </th>
+                        <th pResizableColumn pSortableColumn="phone" style="width:12%">Phone <p-sortIcon field="phone"/>
+                            <div style="display: contents;">
+                                <p-columnFilter type="text" field="phone" display="menu" />
+                            </div>
+                        </th>
+                        <th pResizableColumn pSortableColumn="IBANs" styleClass="overflow-hidden">IBANs <p-sortIcon field="IBANs"/>
+                            <div style="display: contents;">
+                                <p-columnFilter type="text" field="IBANs" display="menu" />
+                            </div>
+                        </th>
+                    </ng-container>
+                    <ng-container *ngIf="!displayAllRows">
+                        <th *ngFor="let col of selectedColumns" pResizableColumn [pSortableColumn]="col.field" [style.width.%]="col.width">
+                            {{ col.header }} <p-sortIcon [field]="col.field" />
+                            
+                            <div *ngIf="col.filter" style="display: contents;">
+                              <p-columnFilter 
+                                [type]="col.filterType || 'text'" 
+                                [field]="col.field" 
+                                display="menu"
+                              />
+                            </div>
+                          </th>
+                    </ng-container>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-beneficiary>
+                <tr [pSelectableRow]="beneficiary">
+                    <ng-container *ngIf="displayAllRows">
+                        <td>{{ beneficiary.name }}</td>
+                        <td>{{ beneficiary.CUI }}</td>
+                        <td>{{ beneficiary.firstName }}</td>
+                        <td>{{ beneficiary.lastName }}</td>
+                        <td>{{ utils.formatToDate(beneficiary.dateOfIncorporation) }}</td>
+                        <td>{{ utils.formatToDate(beneficiary.birthDate) }}</td>
+                        <td>{{ beneficiary.address }}</td>
+                        <td>{{ beneficiary.phone }}</td>
+                        <td class="d-flex flex-column gap-1">
+                            <p-chip *ngFor="let iban of beneficiary.IBANs" [label]="iban"></p-chip>
+                        </td>
+                    </ng-container>
+                    <ng-container *ngIf="!displayAllRows">
+                        <td *ngFor="let col of selectedColumns" [style.width]="col.width">
+                            <div *ngIf="col.field === 'IBANs'" class="d-flex flex-column gap-1">
+                                <p-chip *ngFor="let iban of beneficiary.IBANs" [label]="iban"></p-chip>
+                            </div>
+                            <div *ngIf="col.field !== 'IBANs'">
+                                {{ parseColumn(col.field, beneficiary) }}
+                            </div>
+                        </td>
+                    </ng-container>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-card>
 
-<div>
-    <app-context-bar
-        [btnConfig]="btnConfig"
-        [btnList]="btnList"
-        (buttonClick)="onBtnClick($event)"
-    ></app-context-bar>
+    <div>
+        <app-context-bar
+            [btnConfig]="btnConfig"
+            [btnList]="btnList"
+            (buttonClick)="onBtnClick($event)"
+        ></app-context-bar>
+    </div>
 </div>
 
 <app-modal #addModal [modalConfig]="addModalConfig">

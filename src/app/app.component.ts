@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { StatusModalComponent } from './core/components/modal/status-modal/status-modal.component';
 import { StatusModalService } from './core/components/modal/status-modal/status-modal.service';
 import { ModalStatusEventEmitted } from './core/components/modal/modal.config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('statusModal') statusModal!: StatusModalComponent;
 
-  constructor(private storageService: StorageService, private statusModalService: StatusModalService) {}
+  constructor(private storageService: StorageService, private statusModalService: StatusModalService, private router: Router) {}
 
   ngOnInit(): void {
     this.storageService.saveToLocalStorage('beneficiaryList', beneficiaryList);
 
     this.addStatusSub();
+    this.navigateToBeneficiaryPage();
   }
 
   ngOnDestroy(): void {
@@ -37,5 +39,9 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.subs.add(eventSub$);
+  }
+
+  private navigateToBeneficiaryPage() {
+    this.router.navigate(['dashboard/beneficiaries']);
   }
 }

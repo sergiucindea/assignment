@@ -5,6 +5,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
+@import "./assets/_variables.scss";
 
 html, body { height: 100%; }
 body { 
@@ -17,18 +18,49 @@ body {
     background-color: rgb(247, 247, 247);
 }
 
-/* Variables */
-
-$background-color-green: #344e41;
-$background-color-light-green: #76a58d;
-$background-color-platinum: #f0e9eb;
-
 .bg-green {
     background-color: $background-color-green;
 }
 
 .bg-platinum {
     background-color: $background-color-platinum;
+}
+
+.bg-light-green,
+.bg-light-green .p-button {
+    background-color: $background-color-light-green;
+}
+
+.bg-dark-green,
+.bg-dark-green .p-button {
+    background-color: $background-color-dark-green;
+}
+
+.bg-dark-blue,
+.bg-dark-blue .p-button {
+    background-color: $background-color-dark-blue;
+}
+
+.bg-light-blue,
+.bg-light-blue .p-button {
+    background-color: $background-color-light-blue;
+}
+
+.bg-danger .p-button {
+    background-color: #dc3545;
+}
+
+.bg-warn .p-button {
+    background-color: #ffc107;
+}
+
+.p-button:focus,
+.p-button:focus-visible {
+    box-shadow: none;
+}
+
+p-selectbutton .p-button {
+    background-color: #f1f1f1;
 }
 
 .custom-sidebar-col {
@@ -60,6 +92,15 @@ $background-color-platinum: #f0e9eb;
 
 ol, ul {
     padding-left: 0;
+    margin-bottom: 0;
+}
+
+.p-dropdown-panel .p-dropdown-items {
+    padding: 0;
+}
+
+.p-inputtext {
+    padding: 0.45rem;
 }
 
 .select-btn .p-button {
@@ -73,7 +114,7 @@ ol, ul {
 
 p-calendar {
     border: none;
-    padding: 0;
+    padding: 0 !important;
 
     span {
         width: 100%;
@@ -86,4 +127,21 @@ p-calendar {
 
 .p-inputgroup-addon {
  padding: 0;
+}
+
+.p-button {
+    border: none;
+}
+
+p-chips .p-chips,
+p-chips .p-chips ul {
+    width: 100%;
+}
+
+.p-inputtext.ng-invalid.ng-touched {
+    border-color: #e24c4c;
+}
+
+p-chips.p-inputwrapper.ng-invalid.ng-touched ul{
+    border-color: #e24c4c;
 }
