@@ -147,10 +147,18 @@ export class UtilsService {
 
       if (Array.isArray(ibans) && ibans.length > 0) {
         let invalidIbans: string[] = [];
+        let ibanSet = new Set<string>();
+
         ibans.forEach((iban: string) => {
           let isValid: boolean = this.isIBANValid(iban);
           if (!isValid)
             invalidIbans.push(iban);
+
+          if (ibanSet.has(iban)) {
+            invalidIbans.push(iban);
+          } else {
+            ibanSet.add(iban);
+          }
         });
 
         if (invalidIbans.length > 0)
